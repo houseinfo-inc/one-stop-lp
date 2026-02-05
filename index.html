@@ -208,6 +208,14 @@
             vertical-align: middle;
             margin-right: 8px;
         }
+
+        /* Nav and Footer Brand Link Styling */
+        .brand-link {
+            transition: color 0.3s;
+        }
+        .brand-link:hover {
+            color: var(--gold);
+        }
     </style>
 </head>
 <body class="noise line-pattern">
@@ -217,7 +225,8 @@
     <!-- Navigation -->
     <nav class="fixed w-full z-[150] px-6 py-4 md:px-10 md:py-8 flex justify-between items-center mix-blend-difference">
         <div class="text-lg md:text-xl font-serif tracking-[0.2em] text-white whitespace-nowrap flex-shrink-0">
-            姫路スタイル <span class="text-[var(--gold)] text-[10px] md:text-xs ml-2 uppercase font-bold tracking-widest">New Service</span>
+            <a href="https://himejistyle.jp/" target="_blank" class="brand-link">姫路スタイル</a>
+            <span class="text-[var(--gold)] text-[10px] md:text-xs ml-2 uppercase font-bold tracking-widest">New Service</span>
         </div>
         
         <!-- Desktop Menu -->
@@ -437,6 +446,7 @@
                         <div class="flex justify-between items-start mb-4 text-left">
                             <h4 class="text-xl md:text-2xl font-serif text-white">継続運用プラン</h4>
                             <div class="flex flex-col items-end gap-1">
+                                <span class="text-[8px] md:text-[10px] px-3 py-1 bg-[var(--gold)] text-black font-bold">推奨</span>
                                 <span class="badge-campaign !mr-0">初月半額対象</span>
                             </div>
                         </div>
@@ -475,7 +485,9 @@
 
     <footer class="py-16 md:py-20 border-t border-gray-900 text-center relative overflow-hidden">
         <div class="text-[8px] md:text-[10px] tracking-[0.8em] text-gray-600 uppercase mb-6 opacity-50">Precision in every step</div>
-        <div class="text-[10px] md:text-xs text-gray-500 font-serif tracking-[0.2em]">&copy; 2024 姫路スタイル. ALL RIGHTS RESERVED.</div>
+        <div class="text-[10px] md:text-xs text-gray-500 font-serif tracking-[0.2em]">
+            &copy; 2024 <a href="https://himejistyle.jp/" target="_blank" class="brand-link">姫路スタイル</a>. ALL RIGHTS RESERVED.
+        </div>
     </footer>
 
     <script>
@@ -511,6 +523,34 @@
         };
 
         menuToggle.addEventListener('click', toggleMenu);
+
+        // Modal Logic
+        const modal = document.getElementById('logic-modal');
+        const modalCat = document.getElementById('modal-category');
+        const modalTitle = document.getElementById('modal-title');
+        const modalDesc = document.getElementById('modal-desc');
+        const closeBtn = document.getElementById('close-modal');
+        const triggers = document.querySelectorAll('.logic-trigger');
+
+        triggers.forEach(trigger => {
+            trigger.addEventListener('click', () => {
+                modalCat.textContent = trigger.dataset.cat;
+                modalTitle.textContent = trigger.dataset.title;
+                modalDesc.textContent = trigger.dataset.desc;
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        const closeModalFunc = () => {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        };
+
+        closeBtn.addEventListener('click', closeModalFunc);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModalFunc();
+        });
 
         // Interactive Elements Hover
         const hoverables = document.querySelectorAll('a, button, .bento-card');
