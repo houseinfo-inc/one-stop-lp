@@ -1,0 +1,28 @@
+name: Deploy to Sakura via SFTP
+on:
+  push:
+    branches:
+      - main
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: SFTP Deploy
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+        with:
+          # Secretsに登録済みの情報（himejistyle / himejistyle.sakura.ne.jp）
+          username: ${{ secrets.FTP_USERNAME }}
+          server: ${{ secrets.FTP_SERVER }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          # ⚠️ 重要：SFTP用の 22 番ポートを使います
+          port: 22 
+          
+          # ⚠️ 下記の赤字にアップするフォルダ名(赤********)をいれる
+          local_path: './*'
+          remote_path: '/home/himejistyle/www/pub/ad/lpana/'
+          
+          # 初回接続時の確認をスキップする設定
+          args: '-o StrictHostKeyChecking=no'
