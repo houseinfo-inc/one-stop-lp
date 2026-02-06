@@ -1,10 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>姫路スタイル | 成果獲得型LP運用支援 - 制作をゴールにしない集客の仕組み化</title>
-
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-G5NYDSSC8V"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -13,6 +10,7 @@
       gtag('config', 'G-G5NYDSSC8V');
     </script>
 
+    <!-- Microsoft Clarity -->
     <script type="text/javascript">
         (function(c,l,a,r,i,t,y){
             c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
@@ -21,6 +19,7 @@
         })(window, document, "clarity", "script", "vcwoahz0ba");
     </script>
 
+    <!-- Meta Pixel Code -->
     <script>
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -37,6 +36,9 @@
     src="https://www.facebook.com/tr?id=4241001489490725&ev=PageView&noscript=1"
     /></noscript>
 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>姫路スタイル | 成果獲得型LP運用支援 - 制作をゴールにしない集客の仕組み化</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -424,16 +426,16 @@
                 <div class="bento-card p-8 rounded-[2rem] flex flex-col justify-between h-[380px] md:h-[420px] reveal group cursor-pointer logic-trigger"
                      data-cat="Strategy"
                      data-title="目的別LP設計"
-                     data-desc="「なんとなく作る」のは、もうやめましょう。まずは問い合わせというゴールから逆算して、ターゲットの悩みや自社の強みを整理します。ヒアリングをもとに、ユーザーを迷わせない『成約への一本道』を設計。最初から分析ツールを組み込んでおくので、公開したその瞬間から、ユーザーがどう動いたかをしっかり追える状態に整えます。">
+                     data-desc="「なんとなく作る」のは、もうやめましょう。まずは問い合わせというゴールから逆算して、ターゲットの悩みや自社の強みを整理します。姫路スタイルでは、Metaピクセル、Googleアナリティクス、Microsoft Clarityといった主要な分析ツールを初期段階から『標準実装』します。公開したその瞬間から、ユーザーがどこで迷い、どこをクリックしたのかを正確に追える状態に整える。これこそが、勝つための設計の第一歩です。">
                     <div>
                         <div class="w-10 h-10 md:w-12 md:h-12 mb-8">
                             <svg class="w-full h-full gold-svg-icon" viewBox="0 0 24 24"><path d="M2 3h20v14H2zM2 7h20M12 17v4M8 21h8"/></svg>
                         </div>
                         <h4 class="text-lg md:text-xl font-serif mb-4 text-white">目的別LP設計</h4>
-                        <p class="text-[10px] md:text-xs text-gray-500 leading-relaxed">約1週間のスピード設計。ターゲットの心に刺さる、無駄のない構成案を作ります。</p>
+                        <p class="text-[10px] md:text-xs text-gray-500 leading-relaxed">約1週間のスピード設計。Metaピクセル・GA4・Clarityを標準実装し、動線を可視化します。</p>
                     </div>
                     <div class="border-t border-gray-800 pt-6 text-[10px] text-gray-600 flex justify-between">
-                        <span>GA4 / CLARITY</span>
+                        <span>GA4 / Clarity / Meta</span>
                         <span class="text-[var(--gold)]">STEP 01</span>
                     </div>
                 </div>
@@ -597,13 +599,11 @@
     </footer>
 
     <script>
-        // カスタムカーソルのロジック
         const cursor = document.getElementById('cursor');
         document.addEventListener('mousemove', (e) => {
             cursor.style.transform = `translate(${e.clientX - 6}px, ${e.clientY - 6}px)`;
         });
 
-        // モバイルメニュー
         const menuToggle = document.getElementById('menu-toggle');
         const mobileMenu = document.getElementById('mobile-menu');
         const bar1 = document.getElementById('bar1');
@@ -628,7 +628,6 @@
         };
         menuToggle.addEventListener('click', toggleMenu);
 
-        // モーダルの表示ロジック
         const modal = document.getElementById('logic-modal');
         const modalCat = document.getElementById('modal-category');
         const modalTitle = document.getElementById('modal-title');
@@ -655,13 +654,13 @@
             if (e.target === modal) closeModalFunc();
         });
 
-        // ホバーエフェクト
         const hoverables = document.querySelectorAll('a, button, .bento-card, .logic-trigger');
         hoverables.forEach(el => {
             el.addEventListener('mouseenter', () => {
                 cursor.style.width = '60px';
                 cursor.style.height = '60px';
                 cursor.style.backgroundColor = 'white';
+                cursor.style.mixBlendMode = 'difference';
                 if(el.classList.contains('campaign-card')) {
                     cursor.classList.add('on-gold');
                 }
@@ -670,11 +669,11 @@
                 cursor.style.width = '12px';
                 cursor.style.height = '12px';
                 cursor.style.backgroundColor = '#D4AF37';
+                cursor.style.mixBlendMode = 'normal';
                 cursor.classList.remove('on-gold');
             });
         });
 
-        // スクロール時のフェードイン
         const handleReveal = () => {
             const reveals = document.querySelectorAll('.reveal');
             for (let i = 0; i < reveals.length; i++) {
