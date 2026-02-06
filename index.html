@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <!-- 文字化け防止のため、必ず先頭（最初から1024バイト以内）に記述します -->
+    <!-- 文字化け防止：ブラウザが最初に読み込む必要があるため、必ず先頭に記述 -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
@@ -51,8 +51,8 @@
             --rich-black: #1A1A1A;
             --gold: #D4AF37;
             --gold-muted: rgba(212, 175, 55, 0.4);
-            --gold-light: #F1E4C1;
-            --text-main: #E5E5E5;
+            --text-main: #FFFFFF;
+            --text-sub: #F9FAFB;
         }
 
         html { scroll-behavior: smooth; }
@@ -65,6 +65,7 @@
             cursor: none;
         }
 
+        /* スマホでのカスタムカーソル無効化 */
         @media (hover: none) and (pointer: coarse) {
             #cursor { display: none; }
             body { cursor: auto; }
@@ -72,6 +73,7 @@
 
         .font-serif { font-family: 'Noto Serif JP', serif; }
 
+        /* ノイズテクスチャ */
         .noise::before {
             content: "";
             position: fixed;
@@ -82,6 +84,7 @@
             background-image: url('https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Grain_Noise.png');
         }
 
+        /* カスタムカーソル */
         #cursor {
             position: fixed;
             width: 12px; height: 12px;
@@ -93,11 +96,13 @@
             transition: transform 0.15s ease-out, width 0.3s, height 0.3s, background-color 0.3s;
         }
 
+        /* ゴールド背景上でのカーソル調整 */
         #cursor.on-gold {
             mix-blend-mode: multiply;
             background-color: rgba(0,0,0,0.15) !important;
         }
 
+        /* キネティック・タイポグラフィ */
         .kinetic-text-wrap {
             overflow: hidden;
             white-space: nowrap;
@@ -119,22 +124,25 @@
             100% { transform: translateX(-50%); }
         }
 
+        /* Bento UI カード */
         .bento-card {
-            background: linear-gradient(145deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
-            border: 1px solid rgba(212, 175, 55, 0.1);
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01));
+            border: 1px solid rgba(212, 175, 55, 0.2);
             backdrop-filter: blur(10px);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
             transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
         }
         .bento-card:hover {
             border-color: var(--gold);
-            background: rgba(212, 175, 55, 0.05);
+            background: rgba(212, 175, 55, 0.08);
             transform: translateY(-8px) scale(1.01);
-            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.6);
         }
 
+        /* キャンペーンカード（背景固定・文字色黒固定） */
         .campaign-card {
             background-color: var(--gold) !important;
+            color: var(--rich-black) !important;
         }
 
         .btn-premium {
@@ -175,6 +183,7 @@
             transform: translateY(0);
         }
 
+        /* モバイルメニュー */
         #mobile-menu {
             transition: opacity 0.4s ease-in-out, visibility 0.4s;
             opacity: 0;
@@ -187,6 +196,7 @@
             visibility: visible;
         }
 
+        /* モーダル */
         #logic-modal {
             transition: opacity 0.4s cubic-bezier(0.23, 1, 0.32, 1), visibility 0.4s;
             opacity: 0;
@@ -199,18 +209,7 @@
         .modal-content {
             background-color: var(--rich-black);
             border: 1px solid var(--gold);
-            box-shadow: 0 0 50px rgba(212, 175, 55, 0.15);
-        }
-
-        .line-pattern {
-            background-image: radial-gradient(circle at 2px 2px, rgba(212, 175, 55, 0.05) 1px, transparent 0);
-            background-size: 40px 40px;
-        }
-
-        .monochrome-img {
-            filter: grayscale(1) contrast(1.2) brightness(0.8);
-            mix-blend-mode: luminosity;
-            transition: all 0.6s;
+            box-shadow: 0 0 50px rgba(212, 175, 55, 0.2);
         }
 
         .gold-svg-icon {
@@ -233,22 +232,27 @@
             margin-right: 8px;
         }
 
+        .monochrome-img {
+            filter: grayscale(1) contrast(1.2) brightness(0.9);
+            mix-blend-mode: luminosity;
+            transition: all 0.6s;
+        }
+
         .brand-link { transition: color 0.3s; }
         .brand-link:hover { color: var(--gold); }
     </style>
 </head>
-<body class="noise line-pattern">
+<body class="noise">
 
     <div id="cursor"></div>
 
-    <!-- ナビゲーション（スマホ表示崩れ修正済） -->
+    <!-- Navigation -->
     <nav class="fixed w-full z-[150] px-6 py-4 md:px-10 md:py-8 flex justify-between items-center mix-blend-difference">
         <div class="text-lg md:text-xl font-serif tracking-[0.2em] text-white whitespace-nowrap flex-shrink-0">
             <a href="https://himejistyle.jp/" target="_blank" class="brand-link">姫路スタイル</a>
             <span class="text-[var(--gold)] text-[10px] md:text-xs ml-2 uppercase font-bold tracking-widest">New Service</span>
         </div>
         
-        <!-- デスクトップメニュー -->
         <div class="hidden md:flex items-center space-x-8 text-[10px] uppercase tracking-widest text-white">
             <a href="#about" class="hover:text-[var(--gold)] transition">Concept</a>
             <a href="#service" class="hover:text-[var(--gold)] transition">Service</a>
@@ -256,7 +260,6 @@
             <a href="https://forms.gle/jZN2BYDERD1ojYtK6" target="_blank" class="px-6 py-2 border border-white hover:bg-white hover:text-black transition">無料相談</a>
         </div>
 
-        <!-- モバイルトグルボタン -->
         <button id="menu-toggle" class="md:hidden flex flex-col space-y-1.5 focus:outline-none p-2 z-[200]">
             <span class="w-6 h-0.5 bg-white transition-all duration-300 origin-center" id="bar1"></span>
             <span class="w-6 h-0.5 bg-white transition-all duration-300" id="bar2"></span>
@@ -264,7 +267,7 @@
         </button>
     </nav>
 
-    <!-- モバイルメニューオーバーレイ -->
+    <!-- Mobile Menu -->
     <div id="mobile-menu" class="fixed inset-0 flex flex-col justify-center items-center space-y-10 text-center px-10">
         <a href="#about" class="text-2xl font-serif tracking-widest text-white mobile-link">CONCEPT</a>
         <a href="#service" class="text-2xl font-serif tracking-widest text-white mobile-link">SERVICE</a>
@@ -272,8 +275,8 @@
         <a href="https://forms.gle/jZN2BYDERD1ojYtK6" target="_blank" class="text-xl font-serif tracking-widest text-[var(--gold)] border border-[var(--gold)] px-8 py-3 mobile-link">無料相談</a>
     </div>
 
-    <!-- モーダル本体 -->
-    <div id="logic-modal" class="fixed inset-0 z-[1000] flex items-center justify-center p-6 bg-black/95 backdrop-blur-lg">
+    <!-- Logic Modal -->
+    <div id="logic-modal" class="fixed inset-0 z-[1000] flex items-center justify-center p-6 bg-black/90 backdrop-blur-lg">
         <div class="modal-content relative w-full max-w-2xl p-8 md:p-16 rounded-[2rem]">
             <button id="close-modal" class="absolute top-8 right-8 text-gray-500 hover:text-white transition">
                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"></path></svg>
@@ -282,12 +285,12 @@
                 <p id="modal-category" class="text-[var(--gold)] tracking-[0.4em] text-[10px] md:text-xs mb-6 uppercase font-bold"></p>
                 <h3 id="modal-title" class="text-2xl md:text-4xl font-serif mb-8 text-white"></h3>
                 <div class="w-12 h-px bg-[var(--gold)] mb-8 opacity-50"></div>
-                <p id="modal-desc" class="text-gray-400 text-sm md:text-base leading-loose md:text-lg"></p>
+                <p id="modal-desc" class="text-gray-100 text-sm md:text-base leading-loose md:text-lg"></p>
             </div>
         </div>
     </div>
 
-    <!-- ヒーロー -->
+    <!-- 00 Hero -->
     <section class="min-h-screen flex flex-col justify-center items-center relative px-6 text-center pt-20 md:pt-0">
         <div class="absolute inset-0 z-0 kinetic-text-wrap pointer-events-none flex items-center">
             <div class="kinetic-text">HIMEJI STYLE / RESULTS DRIVEN &nbsp; HIMEJI STYLE / RESULTS DRIVEN &nbsp;</div>
@@ -301,9 +304,9 @@
             </a>
             <h1 class="text-4xl md:text-8xl font-serif mb-8 md:mb-10 leading-[1.3] md:leading-[1.15] reveal">
                 LP、作って<br class="md:hidden">満足していませんか？<br>
-                <span class="text-white">大事なのは「問い合わせ」ですよ。</span>
+                <span class="text-white">大事なのは「問合せ」ですよ。</span>
             </h1>
-            <p class="text-gray-400 text-sm md:text-lg mb-10 md:mb-14 max-w-2xl mx-auto leading-relaxed reveal">
+            <p class="text-gray-100 text-sm md:text-lg mb-10 md:mb-14 max-w-2xl mx-auto leading-relaxed reveal">
                 姫路スタイルが贈る、待望の新サービスが始動しました。<br class="hidden md:block">
                 制作をゴールにするのはもう終わり。成果を出すための「運用」を、ここ姫路から提案します。
             </p>
@@ -313,38 +316,36 @@
         </div>
     </section>
 
-    <!-- 課題 -->
+    <!-- 01 Challenge -->
     <section id="about" class="py-24 md:py-40 px-6 bg-[#151515] relative overflow-hidden">
         <div class="max-w-6xl mx-auto">
             <div class="grid md:grid-cols-2 gap-16 md:gap-24 items-center">
                 <div class="reveal">
                     <h2 class="text-[10px] md:text-sm text-[var(--gold)] tracking-widest mb-6 uppercase">01 / Challenge</h2>
-                    <h3 class="text-3xl md:text-4xl font-serif leading-tight mb-8 md:mb-10 text-left">
+                    <h3 class="text-3xl md:text-4xl font-serif leading-tight mb-8 md:mb-10 text-left text-white">
                         「集客」よりも<br>
                         「制作」が目的になっていませんか？
                     </h3>
-                    <p class="text-sm md:text-base text-gray-400 mb-10 md:mb-12 leading-relaxed text-left">
+                    <p class="text-sm md:text-base text-gray-200 mb-10 md:mb-12 leading-relaxed text-left">
                         見た目はいいし、内容も悪くない。なのに、なぜか成果につながらない。そんな状況、もったいないと思いませんか？ 私たちは「誰が成果に責任を持つのか」という問いに対し、一つのチームで答えを出します。
                     </p>
                     <div class="space-y-4 text-left">
                         <div class="flex items-center justify-between border-b border-gray-800 py-4 group cursor-pointer logic-trigger"
-                             data-cat="Structure"
-                             data-title="分業だから責任がバラバラ"
+                             data-cat="Structure" data-title="分業だから責任がバラバラ"
                              data-desc="制作会社は『作る』まで。広告代理店は『出す』まで。これ、業界では当たり前ですが、お客様にとっては不安でしかないですよね。成果が出ないとき、原因がLPにあるのか広告にあるのか、誰も責任を取ってくれない...そんな分断を、私たちは解消します。入り口から出口まで一つのチームで担当するからこそ、言い訳のできない『本気の伴走』ができるんです。">
-                            <span class="text-xs md:text-sm text-gray-500 group-hover:text-white transition">分業だから責任がバラバラ</span>
-                            <svg class="w-4 h-4 md:w-5 md:h-5 gold-svg-icon opacity-10 md:opacity-0 group-hover:opacity-100 transition" viewBox="0 0 24 24"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+                            <span class="text-xs md:text-sm text-white group-hover:text-[var(--gold)] transition">分業だから責任がバラバラ</span>
+                            <svg class="w-4 h-4 md:w-5 md:h-5 gold-svg-icon opacity-10 group-hover:opacity-100 transition" viewBox="0 0 24 24"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
                         </div>
                         <div class="flex items-center justify-between border-b border-gray-800 py-4 group cursor-pointer logic-trigger"
-                             data-cat="Verification"
-                             data-title="出しっぱなしで検証していない"
+                             data-cat="Verification" data-title="出しっぱなしで検証していない"
                              data-desc="『LPを作れば売れる』というのは、残念ながら今の時代には通用しません。本当の勝負は、公開したあとに始まるんです。なのに、多くの現場では出しっぱなしで放置されているのが実情。どの言葉が響いて、どこでみんな帰ってしまったのか。その『足跡』を辿らずに改善なんてできませんよね。私たちは、動いた証拠（データ）を一つひとつ拾い集めて、勝てる形にまでLPを育て上げます。">
-                            <span class="text-xs md:text-sm text-gray-500 group-hover:text-white transition">出しっぱなしで検証していない</span>
-                            <svg class="w-4 h-4 md:w-5 md:h-5 gold-svg-icon opacity-10 md:opacity-0 group-hover:opacity-100 transition" viewBox="0 0 24 24"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+                            <span class="text-xs md:text-sm text-white group-hover:text-[var(--gold)] transition">出しっぱなしで検証していない</span>
+                            <svg class="w-4 h-4 md:w-5 md:h-5 gold-svg-icon opacity-10 group-hover:opacity-100 transition" viewBox="0 0 24 24"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
                         </div>
                     </div>
                 </div>
                 <div class="relative reveal monochrome-container">
-                    <div class="aspect-[4/5] bg-gray-900 overflow-hidden rounded-[2rem] rounded-tr-[5rem] md:rounded-tr-[10rem] border border-gray-800">
+                    <div class="aspect-[4/5] bg-gray-900 overflow-hidden rounded-[2rem] rounded-tr-[5rem] md:rounded-tr-[10rem] border border-gray-800 shadow-2xl">
                         <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=800&auto=format&fit=crop" alt="Analysis" class="w-full h-full object-cover monochrome-img">
                     </div>
                 </div>
@@ -352,130 +353,235 @@
         </div>
     </section>
 
-    <!-- ロジック -->
+    <!-- 02 Logic -->
     <section class="py-24 md:py-40 px-6 relative">
         <div class="max-w-4xl mx-auto text-center relative z-10">
             <h2 class="text-[10px] md:text-sm text-[var(--gold)] tracking-widest mb-6 uppercase">02 / Logic</h2>
-            <h3 class="text-2xl md:text-5xl font-serif mb-10 md:mb-12 leading-relaxed reveal">
+            <h3 class="text-2xl md:text-5xl font-serif mb-10 md:mb-12 leading-relaxed reveal text-white">
                 なぜ、あえて「短期間」で動くのか？
             </h3>
-            <p class="text-sm md:text-base text-gray-400 leading-loose reveal px-4 md:px-0 mb-16">
+            <p class="text-sm md:text-base text-gray-100 leading-loose reveal px-4 md:px-0 mb-16">
                 市場は生き物です。完璧を求めて時間を浪費するより、まずは世に出して試してみる。高速でテストし、改善を繰り返すこと。これこそが、最短で結果を出すための「正解」なんです。
             </p>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8">
                 <div class="reveal group bento-card p-10 rounded-[2.5rem] cursor-pointer logic-trigger text-center" 
                      data-cat="Sales Tool" data-title="LPは営業ツール" 
-                     data-desc="LPはただのWebサイトじゃありません。24時間365日働き続ける『最強の営業マン』なんです。だから、見た目が綺麗なだけでは失格。ターゲットが何を悩み、どんな言葉で心が動くのか。一文字まで意図を込めた『説得の物語』が必要です。私たちは売上に直結する実戦的なツールとしてLPを鍛え上げます。">
+                     data-desc="LPはただのWebサイトじゃありません。24時間365日働き続ける『最強の営業マン』なんです。だから、見た目が綺麗なだけでは失格。ターゲットが何を悩み、どんな言葉で心が動くのか。一文字まで意図を込めた『説得の物語』が必要です。">
                     <div class="w-12 h-12 md:w-16 md:h-16 mx-auto mb-6 flex items-center justify-center">
                         <svg class="w-full h-full gold-svg-icon group-hover:scale-110 transition" viewBox="0 0 24 24"><path d="M12 2v20M2 12h20M4.93 4.93l14.14 14.14M4.93 19.07L19.07 4.93"/></svg>
                     </div>
                     <div class="text-[var(--gold)] text-[10px] mb-2 font-bold uppercase tracking-widest">LP is</div>
-                    <div class="text-xl md:text-2xl font-serif">営業ツール</div>
+                    <div class="text-xl md:text-2xl font-serif text-white">営業ツール</div>
                 </div>
                 <div class="reveal group bento-card p-10 rounded-[2.5rem] cursor-pointer logic-trigger text-center" 
                      data-cat="Verification" data-title="ADは検証手段" 
-                     data-desc="広告をただの「宣伝」だと思っていませんか？ 私たちはSNS広告を、市場の本音を探るための『高精度なセンサー』だと捉えています。複数のパターンを走らせて、ターゲットに何が響くのかをデータで突き止める。大きな予算をかける前に、まずは少額で正解を探る。勘に頼る時代はもう終わりです。">
+                     data-desc="広告をただの『宣伝』だと思っていませんか？ SNS広告を、市場の本音を探るための『高精度なセンサー』だと捉えています。少額で正解を探る。勘に頼る時代はもう終わりです。">
                     <div class="w-12 h-12 md:w-16 md:h-16 mx-auto mb-6 flex items-center justify-center">
                         <svg class="w-full h-full gold-svg-icon group-hover:scale-110 transition" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m16 12-4-4-4 4m4-4v8"/></svg>
                     </div>
                     <div class="text-[var(--gold)] text-[10px] mb-2 font-bold uppercase tracking-widest">AD is</div>
-                    <div class="text-xl md:text-2xl font-serif">検証手段</div>
+                    <div class="text-xl md:text-2xl font-serif text-white">検証手段</div>
                 </div>
                 <div class="reveal group bento-card p-10 rounded-[2.5rem] cursor-pointer logic-trigger text-center" 
                      data-cat="Improvement" data-title="Value is 改善材料" 
-                     data-desc="集計された数字は、単なる結果報告ではありません。それは、次に何をすべきかを教えてくれる『宝の地図』です。クリック率や離脱ポイントを読み解き、仮説を立てて、また直す。一度作って終わらせず、磨き続けることこそが成功への唯一の道。数字を武器に、最強の集客フローを一緒に作りましょう。">
+                     data-desc="集計された数字は単なる結果報告ではありません。それは、次に何をすべきかを教えてくれる『宝の地図』です。泥臭く磨き続けることこそが成功への唯一の道。">
                     <div class="w-12 h-12 md:w-16 md:h-16 mx-auto mb-6 flex items-center justify-center">
                         <svg class="w-full h-full gold-svg-icon group-hover:scale-110 transition" viewBox="0 0 24 24"><path d="m3 11 18-5v12L3 11zM11 11v12M11 1V11"/></svg>
                     </div>
                     <div class="text-[var(--gold)] text-[10px] mb-2 font-bold uppercase tracking-widest">Value is</div>
-                    <div class="text-xl md:text-2xl font-serif">改善材料</div>
+                    <div class="text-xl md:text-2xl font-serif text-white">改善材料</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- キャンペーン -->
+    <!-- 03 Service Flow (視認性改善済み) -->
+    <section id="service" class="py-24 md:py-40 px-6 bg-[#151515] relative text-center">
+        <div class="max-w-6xl mx-auto relative z-10">
+            <h2 class="text-[10px] md:text-sm text-[var(--gold)] tracking-widest mb-16 reveal uppercase">03 / Service Flow</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+                <!-- Step 1 -->
+                <div class="bento-card p-8 rounded-[2rem] flex flex-col justify-between h-[380px] md:h-[420px] reveal group cursor-pointer logic-trigger"
+                     data-cat="Strategy" data-title="目的別LP設計"
+                     data-desc="ゴールから逆算してターゲットの悩みや強みを整理。解析タグを初期段階から標準実装し、動きを完全に可視化します。">
+                    <div class="text-left">
+                        <div class="w-10 h-10 md:w-12 md:h-12 mb-8">
+                            <svg class="w-full h-full gold-svg-icon" viewBox="0 0 24 24"><path d="M2 3h20v14H2zM2 7h20M12 17v4M8 21h8"/></svg>
+                        </div>
+                        <h4 class="text-lg md:text-xl font-serif mb-4 text-white">目的別LP設計</h4>
+                        <p class="text-[11px] md:text-xs text-gray-100 leading-relaxed font-light">約1週間のスピード設計。解析タグを標準実装し、ユーザーの動きを完全に可視化します。</p> <!-- text-gray-100に変更 -->
+                    </div>
+                    <div class="border-t border-gray-800 pt-6 text-[10px] text-gray-400 flex justify-between uppercase">
+                        <span>Tagging</span>
+                        <span class="text-[var(--gold)] font-bold">Step 01</span>
+                    </div>
+                </div>
+                <!-- Step 2 -->
+                <div class="bento-card p-8 rounded-[2rem] flex flex-col justify-between h-[380px] md:h-[420px] sm:mt-8 md:mt-12 reveal group cursor-pointer logic-trigger" 
+                     data-cat="Promotion" data-title="SNS広告運用"
+                     data-desc="Meta広告を中心に3パターンの検証を実施。市場の本音をあぶり出し、クリック率を改善し続けます。">
+                    <div class="text-left">
+                        <div class="w-10 h-10 md:w-12 md:h-12 mb-8">
+                            <svg class="w-full h-full gold-svg-icon" viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                        </div>
+                        <h4 class="text-lg md:text-xl font-serif mb-4 text-white">SNS広告運用</h4>
+                        <p class="text-[11px] md:text-xs text-gray-100 leading-relaxed font-light">Meta広告を中心に3パターンの検証を実施。市場の本音をあぶり出します。</p> <!-- text-gray-100に変更 -->
+                    </div>
+                    <div class="border-t border-gray-800 pt-6 text-[10px] text-gray-400 flex justify-between uppercase">
+                        <span>Advertising</span>
+                        <span class="text-[var(--gold)] font-bold">Step 02</span>
+                    </div>
+                </div>
+                <!-- Step 3 -->
+                <div class="bento-card p-8 rounded-[2rem] flex flex-col justify-between h-[380px] md:h-[420px] reveal group cursor-pointer logic-trigger" 
+                     data-cat="Analysis" data-title="効果測定レポート"
+                     data-desc="ヒートマップ等を用いて課題を浮き彫りに。次の一手を決めるための経営判断のデータをお届けします。">
+                    <div class="text-left">
+                        <div class="w-10 h-10 md:w-12 md:h-12 mb-8">
+                            <svg class="w-full h-full gold-svg-icon" viewBox="0 0 24 24"><path d="M3 3v18h18M7 16l4-4 4 4 5-8"/></svg>
+                        </div>
+                        <h4 class="text-lg md:text-xl font-serif mb-4 text-white">効果測定レポート</h4>
+                        <p class="text-[11px] md:text-xs text-gray-100 leading-relaxed font-light">終了後3日以内。次の一手を決めるための「数値的な根拠」を可視化してお届けします。</p> <!-- text-gray-100に変更 -->
+                    </div>
+                    <div class="border-t border-gray-800 pt-6 text-[10px] text-gray-400 flex justify-between uppercase">
+                        <span>Analysis</span>
+                        <span class="text-[var(--gold)] font-bold">Step 03</span>
+                    </div>
+                </div>
+                <!-- Step 4 -->
+                <div class="bento-card p-8 rounded-[2rem] flex flex-col justify-between h-[380px] md:h-[420px] sm:mt-8 md:mt-12 reveal group cursor-pointer logic-trigger" 
+                     data-cat="Optimization" data-title="改善提案・再設計"
+                     data-desc="データから見えた課題を具体案として提示。テストと改善を繰り返し、勝利の方程式を確立します。">
+                    <div class="text-left">
+                        <div class="w-10 h-10 md:w-12 md:h-12 mb-8">
+                            <svg class="w-full h-full gold-svg-icon" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                        </div>
+                        <h4 class="text-lg md:text-xl font-serif mb-4 text-white">改善提案・再設計</h4>
+                        <p class="text-[11px] md:text-xs text-gray-100 leading-relaxed font-light">知見を資産へ。テストと改善を繰り返し、成約率を最大まで引き上げ続けます。</p> <!-- text-gray-100に変更 -->
+                    </div>
+                    <div class="border-t border-gray-800 pt-6 text-[10px] text-gray-400 flex justify-between uppercase">
+                        <span>Continuous</span>
+                        <span class="text-[var(--gold)] font-bold">Step 04</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Campaign Section (視認性改善済み) -->
     <section id="campaign" class="py-20 md:py-32 px-6">
-        <div class="max-w-5xl mx-auto text-center">
-            <div class="bento-card campaign-card p-8 md:p-16 rounded-[2.5rem] md:rounded-[4rem] text-[var(--rich-black)] flex flex-col md:flex-row items-center justify-between gap-12 reveal">
+        <div class="max-w-5xl mx-auto">
+            <div class="bento-card campaign-card p-8 md:p-16 rounded-[2.5rem] md:rounded-[4rem] text-[var(--rich-black)] flex flex-col md:flex-row items-center justify-between gap-12 reveal border-none">
                 <div class="flex-1 text-left">
                     <span class="inline-block border-2 border-[var(--rich-black)] px-4 py-1 text-xs font-bold tracking-widest mb-6">CAMPAIGN</span>
-                    <h2 class="text-3xl md:text-5xl font-serif mb-6 leading-tight">本気の挑戦を、<br>半分、応援させてください。</h2>
-                    <p class="text-sm md:text-base opacity-80 leading-relaxed mb-8">先着10社様に限り「初月費用を半額」で提供いたします。本気で集客を変えたい。その想いにお応えします。</p>
-                    <a href="https://forms.gle/jZN2BYDERD1ojYtK6" target="_blank" class="px-8 py-3 bg-[var(--rich-black)] text-white font-serif tracking-widest text-sm hover:opacity-90 transition">キャンペーン枠で相談する</a>
+                    <h2 class="text-3xl md:text-5xl font-serif mb-6 leading-tight text-black">本気の挑戦を、<br>半分、応援させてください。</h2>
+                    <p class="text-sm md:text-base text-black opacity-100 leading-relaxed mb-8 font-medium"> <!-- opacity-100に修正 -->
+                        姫路スタイルの新サービス開始を記念して、先着10社様に限り「初月費用を半額」で提供いたします。<br class="hidden md:block">
+                        本気で集客の仕組みを変えたい。そんな想いにお応えします。
+                    </p>
+                    <a href="https://forms.gle/jZN2BYDERD1ojYtK6" target="_blank" class="px-8 py-3 bg-[var(--rich-black)] text-white font-serif tracking-widest text-sm hover:bg-black transition shadow-lg">キャンペーン枠で相談する</a>
                 </div>
                 <div class="text-center md:text-right">
-                    <div class="text-[10px] tracking-[0.4em] uppercase font-bold mb-2">Limit Status</div>
-                    <div class="text-5xl md:text-7xl font-serif leading-none mb-2">10<span class="text-2xl ml-1">社限定</span></div>
-                    <div class="text-sm font-bold tracking-widest">初月費用 50% OFF</div>
+                    <div class="text-[10px] tracking-[0.4em] uppercase font-bold mb-2 text-black/60">Limit Status</div> <!-- 文字色調整 -->
+                    <div class="text-5xl md:text-7xl font-serif leading-none mb-2 text-black">10<span class="text-2xl ml-1">社限定</span></div>
+                    <div class="text-sm font-bold tracking-widest text-black/80">初月費用 50% OFF</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- プラン -->
+    <!-- 04 Investment (Price) -->
     <section id="price" class="py-24 md:py-40 px-6">
-        <div class="max-w-6xl mx-auto">
+        <div class="max-w-6xl mx-auto text-center">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 md:mb-20 reveal">
-                <div>
+                <div class="text-left">
                     <h2 class="text-[10px] md:text-sm text-[var(--gold)] tracking-widest mb-6 uppercase">04 / Investment</h2>
-                    <h3 class="text-3xl md:text-4xl font-serif">成果への投資</h3>
+                    <h3 class="text-3xl md:text-4xl font-serif text-white">成果への投資</h3>
                 </div>
-                <p class="text-[10px] text-gray-500 mt-6 md:mt-0">※設計・運用・分析・改善すべて込み / 広告費実費別</p>
+                <p class="text-[10px] text-gray-300 mt-6 md:mt-0">※設計・運用・分析・改善すべて込み / 広告費実費別</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="bento-card p-10 md:p-12 rounded-[2.5rem] reveal cursor-pointer logic-trigger"
+                <!-- Short Term -->
+                <div class="bento-card p-10 md:p-12 rounded-[2.5rem] md:rounded-[3.5rem] flex flex-col justify-between reveal cursor-pointer logic-trigger"
                      data-cat="Short Term" data-title="短期検証プラン"
-                     data-desc="約1.5ヶ月でLP制作から広告テスト、詳細レポートまで丸ごとお引き受けします。低リスクで市場の需要を確かめられるため、新規事業や単発キャンペーンに最適です。">
-                    <div class="flex justify-between items-start mb-4 text-left">
-                        <h4 class="text-xl md:text-2xl font-serif text-white">短期検証プラン</h4>
-                        <span class="badge-campaign">半額対象</span>
+                     data-desc="低コストで市場の需要を最短ルートで『見える化』します。新規事業や単発キャンペーンに。">
+                    <div>
+                        <div class="flex justify-between items-start mb-4 text-left">
+                            <h4 class="text-xl md:text-2xl font-serif text-white">短期検証プラン</h4>
+                            <span class="badge-campaign">10社限定半額対象</span>
+                        </div>
+                        <div class="mb-10 text-left">
+                            <div class="text-4xl md:text-5xl font-serif text-[var(--gold)] mb-2">50,000<span class="text-sm md:text-base ml-2 text-white">円（税別）</span></div>
+                            <p class="text-[10px] text-gray-300 line-through font-light">通常単価：100,000円</p>
+                        </div>
                     </div>
-                    <div class="mb-10 text-left">
-                        <div class="text-4xl md:text-5xl font-serif text-[var(--gold)]">50,000<span class="text-sm ml-2">円（税別）</span></div>
-                        <p class="text-[10px] text-gray-500 line-through">通常：100,000円</p>
-                    </div>
-                    <div class="text-[var(--gold)] border-b border-[var(--gold)] pb-1 inline-block w-fit text-sm">詳細を見る</div>
+                    <div class="text-[var(--gold)] border-b border-[var(--gold)] pb-2 inline-block w-fit text-xs md:text-sm text-left">詳細を見る</div>
                 </div>
-                <div class="bento-card p-10 md:p-12 rounded-[2.5rem] border-[var(--gold)] reveal cursor-pointer logic-trigger"
+                <!-- Continuous -->
+                <div class="bento-card p-10 md:p-12 rounded-[2.5rem] md:rounded-[3.5rem] rounded-bl-[1rem] border-[var(--gold)] reveal cursor-pointer logic-trigger"
                      data-cat="Continuous" data-title="継続運用プラン"
-                     data-desc="集客を自社の安定した資産にするためのプランです。2ヶ月目以降は費用を抑えながら改善を回し、獲得単価を最適化し続けます。">
-                    <div class="flex justify-between items-start mb-4 text-left">
-                        <h4 class="text-xl md:text-2xl font-serif text-white">継続運用プラン</h4>
-                        <span class="badge-campaign">初月半額</span>
+                     data-desc="集客を安定した自社の『資産』に。月額費用を抑えながら、常に最新・最善の体制を維持します。">
+                    <div>
+                        <div class="flex justify-between items-start mb-4 text-left">
+                            <h4 class="text-xl md:text-2xl font-serif text-white">継続運用プラン</h4>
+                            <span class="badge-campaign">初月半額対象</span>
+                        </div>
+                        <div class="mb-10 text-left">
+                            <div class="text-3xl md:text-4xl font-serif text-[var(--gold)] mb-1">42,500<span class="text-base ml-2 text-white">円（税別）</span></div>
+                            <p class="text-[10px] text-gray-300 line-through mb-4 font-light">通常初月：85,000円</p>
+                            <div class="text-3xl md:text-4xl font-serif text-white">25,000<span class="text-sm ml-2">円 / 月（税別）</span></div>
+                        </div>
                     </div>
-                    <div class="mb-10 text-left">
-                        <div class="text-3xl md:text-4xl font-serif text-[var(--gold)]">42,500<span class="text-sm ml-2">円（税別）</span></div>
-                        <p class="text-[10px] text-gray-500 line-through mb-2">通常初月：85,000円</p>
-                        <p class="text-xl text-white">2ヶ月目〜 25,000円</p>
-                    </div>
-                    <div class="text-[var(--gold)] border-b border-[var(--gold)] pb-1 inline-block w-fit text-sm">詳細を見る</div>
+                    <div class="text-[var(--gold)] border-b border-[var(--gold)] pb-2 inline-block w-fit text-xs md:text-sm text-left">詳細を見る</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- コンタクト -->
+    <!-- 05 Philosophy -->
+    <section class="py-24 md:py-40 px-6 bg-white text-[var(--rich-black)] overflow-hidden relative">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row gap-16 md:gap-24 items-center">
+            <div class="flex-1 reveal text-left">
+                <h2 class="text-[10px] md:text-sm text-[var(--gold)] tracking-widest mb-6 font-bold uppercase">Our Philosophy</h2>
+                <h3 class="text-3xl md:text-5xl font-serif mb-8 md:mb-10 leading-tight">ツールに振り回されない。<br>最後の答えを出すのは「人」です。</h3>
+                <p class="text-sm md:text-base leading-relaxed mb-10 text-black font-medium opacity-100">姫路スタイルが大切にしているのは、データの『量』じゃなく『意味』。 顧客がなぜクリックして、なぜ迷ったのか。その機微を感じ取り、ビジネスの核を理解するのは、最後はやっぱり人間の洞察力だと思うんです。私たちは泥臭く数字と向き合い、血の通った改善を徹底します。</p>
+                <div class="flex items-center space-x-6">
+                    <div class="w-16 md:w-20 h-px bg-[var(--gold)]"></div>
+                    <span class="font-serif italic text-sm md:text-lg text-black/70">Craftsmanship in Digital Marketing</span>
+                </div>
+            </div>
+            <div class="flex-1 relative reveal monochrome-container w-full max-w-sm md:max-w-none">
+                <div class="w-full aspect-square bg-[var(--rich-black)] rounded-full overflow-hidden border-[6px] md:border-[10px] border-white shadow-2xl">
+                    <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=800&auto=format&fit=crop" alt="Craftsman" class="w-full h-full object-cover monochrome-img scale-110">
+                </div>
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-center pointer-events-none">
+                    <span class="font-serif text-2xl md:text-3xl tracking-widest block mb-2">匠の目</span>
+                    <span class="text-[8px] md:text-[10px] tracking-[0.4em] uppercase opacity-60">Human Eyes</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 06 Final CTA -->
     <section id="contact" class="py-24 md:py-40 px-6 text-center">
         <div class="max-w-4xl mx-auto reveal">
             <h2 class="text-[10px] md:text-sm text-[var(--gold)] tracking-widest mb-6 uppercase">Contact</h2>
-            <h3 class="text-3xl md:text-6xl font-serif mb-12">まず1回、集客の悩み、<br>「見える化」してみませんか？</h3>
-            <a href="https://forms.gle/jZN2BYDERD1ojYtK6" target="_blank" class="btn-premium font-serif text-base md:text-lg px-16">無料相談に申し込む</a>
-            <p class="mt-8 text-[10px] text-gray-500">
+            <h3 class="text-3xl md:text-6xl font-serif mb-12 text-white">まず1回、集客の悩み、<br>「見える化」してみませんか？</h3>
+            <p class="text-sm md:text-base text-gray-100 mb-12 md:mb-16 leading-loose px-4">現状を整理するだけでも構いません。まずは無料相談（60分）で、今何が起きていて、どこを変えればいいのか。一緒に探しましょう。</p>
+            <a href="https://forms.gle/jZN2BYDERD1ojYtK6" target="_blank" class="btn-premium font-serif text-base md:text-lg px-16 shadow-xl">無料相談に申し込む</a>
+            <p class="mt-12 text-[10px] text-gray-300">
                 &copy; 2026 <a href="https://himejistyle.jp/" target="_blank" class="brand-link">姫路スタイル</a>. ALL RIGHTS RESERVED.
             </p>
         </div>
     </section>
 
     <script>
-        // カスタムカーソル
         const cursor = document.getElementById('cursor');
         document.addEventListener('mousemove', (e) => {
             cursor.style.transform = `translate(${e.clientX - 6}px, ${e.clientY - 6}px)`;
         });
 
-        // モバイルメニュー
         const menuToggle = document.getElementById('menu-toggle');
         const mobileMenu = document.getElementById('mobile-menu');
         const bar1 = document.getElementById('bar1');
@@ -499,7 +605,10 @@
             }
         });
 
-        // モーダル
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => { if(isMenuOpen) menuToggle.click(); });
+        });
+
         const modal = document.getElementById('logic-modal');
         const modalCat = document.getElementById('modal-category');
         const modalTitle = document.getElementById('modal-title');
@@ -524,27 +633,27 @@
         closeBtn.addEventListener('click', closeModalFunc);
         modal.addEventListener('click', (e) => { if (e.target === modal) closeModalFunc(); });
 
-        // アニメーション
         const handleReveal = () => {
             const reveals = document.querySelectorAll('.reveal');
             for (let i = 0; i < reveals.length; i++) {
-                const elementTop = reveals[i].getBoundingClientRect().top;
-                if (elementTop < window.innerHeight - 100) reveals[i].classList.add('active');
+                const rect = reveals[i].getBoundingClientRect();
+                if (rect.top < window.innerHeight - 100) reveals[i].classList.add('active');
             }
         };
         window.addEventListener('scroll', handleReveal);
         window.onload = handleReveal;
 
-        // ホバー処理
-        document.querySelectorAll('a, button, .bento-card').forEach(el => {
+        document.querySelectorAll('a, button, .bento-card, .logic-trigger').forEach(el => {
             el.addEventListener('mouseenter', () => {
                 cursor.style.width = '60px'; cursor.style.height = '60px';
                 cursor.style.backgroundColor = 'white';
+                cursor.style.mixBlendMode = 'difference';
                 if(el.classList.contains('campaign-card')) cursor.classList.add('on-gold');
             });
             el.addEventListener('mouseleave', () => {
                 cursor.style.width = '12px'; cursor.style.height = '12px';
                 cursor.style.backgroundColor = '#D4AF37';
+                cursor.style.mixBlendMode = 'normal';
                 cursor.classList.remove('on-gold');
             });
         });
